@@ -1,0 +1,51 @@
+# 🔹 Ignore Visual Studio & .NET build artifacts
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.csproj.user
+*.dbmdl
+*.jfm
+*.log
+.vscode/
+.ionide/
+
+# 🔹 Ignore ASP.NET Core environment settings
+appsettings*.json
+secrets.json
+.env
+
+# 🔹 Ignore Entity Framework Migrations history, EXCEPT initial migrations
+API/Data/Migrations/*.resx
+API/Data/Migrations/*Snapshot.cs
+
+# 🔹 Ignore compiled binaries
+*.dll
+*.exe
+*.pdb
+*.tar.gz
+*.nupkg
+
+# 🔹 Ignore Rider & JetBrains IDE files
+.idea/
+*.sln.iml
+
+# 🔹 Ignore Angular build artifacts
+Client/node_modules/
+Client/dist/
+Client/.angular/
+
+# 🔹 Ignore TypeScript and Angular logs
+Client/.npm/
+Client/.eslintcache
+Client/package-lock.json
+Client/yarn.lock
+
+# 🔹 Ignore temporary files
+*.swp
+*.swo
+*.tmp
+*.bak
+*.DS_Store
+Thumbs.db
