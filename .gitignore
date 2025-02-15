@@ -32,15 +32,15 @@ API/Data/Migrations/*Snapshot.cs
 *.sln.iml
 
 # 🔹 Ignore Angular build artifacts
-Client/node_modules/
-Client/dist/
-Client/.angular/
+client/node_modules/
+client/dist/
+client/.angular
 
 # 🔹 Ignore TypeScript and Angular logs
-Client/.npm/
-Client/.eslintcache
-Client/package-lock.json
-Client/yarn.lock
+client/.npm/
+client/.eslintcache
+client/package-lock.json
+client/yarn.lock
 
 # 🔹 Ignore temporary files
 *.swp
