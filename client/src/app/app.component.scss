@@ -1,0 +1,32 @@
+@use '@angular/material' as mat;
+@use '../styles.scss' as theme;
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+mat-card {
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+mat-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+mat-icon {
+    margin-right: 10px;
+    color: mat.get-color-from-palette(theme.$my-primary);
+}
+
+.no-users {
+    color: mat.get-color-from-palette(theme.$my-warn);
+    font-weight: bold;
+    text-align: center;
+}

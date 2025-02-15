@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+    <span>🌊 Light Bluish Theme</span>
+</mat-toolbar>
+
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>User List (Fetched from API)</p>
+            <mat-list *ngIf="users.length > 0; else noUsers">
+                <mat-list-item *ngFor="let user of users; let i = index" class="user-item">
+                    <mat-icon>person</mat-icon>
+                    <span>{{ user.id }} - {{ user.userName }}</span>
+                </mat-list-item>
+            </mat-list>
+            <ng-template #noUsers>
+                <p class="no-users">No users found.</p>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div>
