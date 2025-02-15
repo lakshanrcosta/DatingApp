@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+
+$my-primary: mat.define-palette(mat.$light-blue-palette, 600);
+$my-accent: mat.define-palette(mat.$cyan-palette, A200);
+$my-warn: mat.define-palette(mat.$deep-orange-palette, A400);
+
+$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+        accent: $my-accent,
+        warn: $my-warn,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0));
+
+@include mat.all-component-themes($my-theme);
+
+html,
+body {
+  background-color: #f4f8fc;
+  color: #37474f;
+  font-family: 'Roboto', sans-serif;
+}
+
+mat-toolbar {
+  background: mat.get-color-from-palette($my-primary);
+  color: white;
+}
