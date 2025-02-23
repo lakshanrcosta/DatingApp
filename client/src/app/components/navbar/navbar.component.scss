@@ -1,0 +1,88 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 8px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.left-section {
+    display: flex;
+    margin-right: 32px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #4285f4;
+    }
+
+    .account-text {
+        font-weight: normal;
+        color: #5f6368;
+        margin-left: 4px;
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: 16px;
+
+    a {
+        text-decoration: none;
+        font-size: 16px;
+        color: #5f6368;
+        font-weight: 500;
+        transition: color 0.3s;
+
+        &:hover {
+            color: #4285f4;
+        }
+    }
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    button {
+        background-color: #4285f4;
+        color: #f8f9fa;
+    }
+
+    .profile-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .profile-btn img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-menu {
+        min-width: 180px;
+        max-width: 220px;
+    }
+}
+
+.profile-menu {
+    min-width: 180px;
+    max-width: 420px;
+}
+
+.spacer {
+    flex: 1;
+}
