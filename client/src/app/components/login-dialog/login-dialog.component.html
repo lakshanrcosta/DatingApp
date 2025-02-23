@@ -1,0 +1,28 @@
+<mat-dialog-content class="login-container">
+    <h2>Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" placeholder="Enter your username">
+            <mat-error *ngIf="loginForm.get('username')?.invalid">Username is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" placeholder="Enter your password">
+            <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button class="full-width custom-login-btn">Login</button>
+    </form>
+
+    <div class="links">
+        <a href="#" (click)="forgotPassword()">Forgot Password?</a>
+        <a href="#" (click)="signup()">Sign Up</a>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>
