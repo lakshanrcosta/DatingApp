@@ -1,27 +1,40 @@
 @use '@angular/material' as mat;
 
-
 $my-primary: mat.define-palette(mat.$light-blue-palette, 600);
 $my-accent: mat.define-palette(mat.$cyan-palette, A200);
 $my-warn: mat.define-palette(mat.$deep-orange-palette, A400);
 
-$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+$my-light-theme: mat.define-light-theme((color: (primary: $my-primary,
         accent: $my-accent,
         warn: $my-warn,
       ),
-      typography: mat.define-typography-config(),
+      typography: mat.define-typography-config($font-family: 'lato, serif'), // ✅ Set Global Font
       density: 0));
 
-@include mat.all-component-themes($my-theme);
+@include mat.core();
+@include mat.all-component-themes($my-light-theme);
 
 html,
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   background-color: #f4f8fc;
-  color: #37474f;
-  font-family: 'Roboto', sans-serif;
+  color: mat.get-color-from-palette($my-primary, 900);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 mat-toolbar {
-  background: mat.get-color-from-palette($my-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  background-color: mat.get-color-from-palette($my-primary, 700);
   color: white;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
 }
