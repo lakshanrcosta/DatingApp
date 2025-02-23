@@ -1,39 +1,46 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-// Import Angular Material Components
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
+import { MaterialModule } from './shared/material.module';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AccountService } from './services/account/account.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, MatToolbarModule, MatCardModule, MatListModule, MatIconModule]
+  imports: [MaterialModule, NavbarComponent, CommonModule]
 })
 export class AppComponent implements OnInit {
   private readonly http = inject(HttpClient);
+  private readonly accountService = inject(AccountService);
   title: string = 'client';
   users: any[] = [];
 
-  ngOnInit(): void {
-    this.fetchUsers();
+  ngOnInit() {
+    this.setCurrentUser();
   }
 
-  private fetchUsers(): void {
-    this.http.get<any[]>('https://localhost:8083/api/users').subscribe({
-      next: (response) => {
-        console.log('Users fetched successfully:', response);
+  setCurrentUser() {
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      return;
+    }
+
+    const user = JSON.parse(userString);
+    this.accountService.currentUser.set(user);
+  }
+
+  getUsers() {
+    this.http.get('https://localhost:8083/api/users').subscribe({
+      next: (response: any) => {
         this.users = response;
       },
-      error: (error) => {
-        console.error('Error fetching users:', error);
+      error: (error: any) => {
+        console.error('There was an error!', error);
       },
-      complete: () => console.log('User data request completed')
+      complete: () => console.log('Users request has completed')
     });
   }
 }

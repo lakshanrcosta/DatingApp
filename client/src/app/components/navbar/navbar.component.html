@@ -1,0 +1,43 @@
+<mat-toolbar class="navbar">
+    <div class="left-section">
+        <span class="logo">Google</span> <span class="account-text">Account</span>
+    </div>
+
+
+    <nav class="nav-links" *ngIf="isAuthenticated()">
+        <a mat-button routerLink="/dashboard">Dashboard</a>
+        <a mat-button routerLink="/settings">Settings</a>
+        <a mat-button routerLink="/help">Help</a>
+    </nav>
+
+
+    <span class="spacer"></span>
+
+    <div class="right-section">
+
+        <ng-container *ngIf="isAuthenticated(); else loginSection">
+            <span class="user-name">{{ userName() }}</span>
+            <button mat-icon-button class="profile-btn" [matMenuTriggerFor]="profileMenu">
+                <img [src]="userImage" alt="Profile">
+            </button>
+            <button mat-button color="warn" (click)="logout()">Logout</button>
+
+            <mat-menu #profileMenu="matMenu" xPosition="before" yPosition="below" panelClass="profile-menu">
+                <button mat-menu-item (click)="navigateToProfile()">
+                    <mat-icon>person</mat-icon> Edit Profile
+                </button>
+                <button mat-menu-item (click)="navigateToSettings()">
+                    <mat-icon>settings</mat-icon> Settings
+                </button>
+                <mat-divider></mat-divider>
+            </mat-menu>
+        </ng-container>
+
+
+        <ng-template #loginSection>
+            <button mat-button color="primary" (click)=" openLoginDialog()">Login</button>
+        </ng-template>
+
+    </div>
+
+</mat-toolbar>
