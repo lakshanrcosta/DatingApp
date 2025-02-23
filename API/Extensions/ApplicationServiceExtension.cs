@@ -18,7 +18,18 @@ public static class ApplicationServiceExtension
             options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         });
 
-        services.AddCors();
+        services.AddCors(options =>
+        {
+            options.AddPolicy(
+                "AllowFrontend",
+                policy =>
+                    policy
+                        .WithOrigins("http://localhost:4200", "https://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+            );
+        });
         services.AddScoped<ITokenService, TokenService>();
 
         return services;
