@@ -1,0 +1,22 @@
+<div class="home-container">
+  <mat-card class="welcome-card">
+    <h1 class="title">Welcome</h1>
+    <p>
+      Manage your info, privacy, and security to make our platform work better for you.
+      <a routerLink="/learn-more">Learn more</a>
+    </p>
+  </mat-card>
+
+  <!-- Find Your Match Section -->
+  <mat-card class="info-card">
+    <mat-icon class="icon">favorite</mat-icon>
+    <h2>Find Your Match</h2>
+    <p>Come on in to view your matches... All you need is signup.</p>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="navigateToSignup()">Signup</button>
+      <button mat-stroked-button color="accent" routerLink="/learn-more">Learn More</button>
+    </div>
+  </mat-card>
+
+
+</div>

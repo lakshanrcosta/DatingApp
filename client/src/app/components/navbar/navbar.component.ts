@@ -17,7 +17,10 @@ import { AccountService } from '../../services/account/account.service';
 export class NavbarComponent {
   accountService = inject(AccountService);
   isAuthenticated = computed(() => !!this.accountService.currentUser());
-  userName = computed(() => this.accountService.currentUser()?.username || '');
+  userName = computed(() => {
+    const user = this.accountService.currentUser();
+    return user ? `${user.firstName} ${user.lastName}`.trim() : '';
+  });
   userImage = '';
 
   constructor(

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { LoginDto } from '../../dtos/login.dto';
+import { LoginDto, RegisterDto } from '../../dtos/account.dto';
 import { User } from '../../models/user.model';
 import { map } from 'rxjs';
 
@@ -14,6 +14,18 @@ export class AccountService {
 
   login(dto: LoginDto) {
     return this.http.post<User>(this.baseUrl + 'account/login', dto).pipe(
+      map((user) => {
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          return user;
+        }
+        return null;
+      })
+    );
+  }
+
+  register(dto: RegisterDto) {
+    return this.http.post<User>(this.baseUrl + 'account/register', dto).pipe(
       map((user) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
