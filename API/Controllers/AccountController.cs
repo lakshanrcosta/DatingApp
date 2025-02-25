@@ -25,6 +25,8 @@ public class AccountController(DatabaseContext context, ITokenService tokenServi
         var user = new AppUser
         {
             UserName = registerDto.Username.ToLower(),
+            FirstName = registerDto.FirstName,
+            LastName = registerDto.LastName,
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
             PasswordSalt = hmac.Key,
         };
@@ -32,7 +34,13 @@ public class AccountController(DatabaseContext context, ITokenService tokenServi
         context.Users.Add(user);
         await context.SaveChangesAsync();
 
-        return new UserDto { Username = user.UserName, Token = tokenService.CreateToken(user) };
+        return new UserDto
+        {
+            Username = user.UserName,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Token = tokenService.CreateToken(user),
+        };
     }
 
     [HttpPost("login")]
@@ -58,7 +66,13 @@ public class AccountController(DatabaseContext context, ITokenService tokenServi
             }
         }
 
-        return new UserDto { Username = user.UserName, Token = tokenService.CreateToken(user) };
+        return new UserDto
+        {
+            Username = user.UserName,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Token = tokenService.CreateToken(user),
+        };
     }
 
     private async Task<bool> UserExists(string username)
