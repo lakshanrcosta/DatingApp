@@ -1,0 +1,78 @@
+<div class="signup-container">
+    <mat-card class="signup-card">
+        <h2>Sign Up</h2>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <!-- Username -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" required>
+                <mat-error *ngIf="signupForm.get('username')?.hasError('customError'); else usernameRequired">
+                    Username is already taken
+                </mat-error>
+                <ng-template #usernameRequired>
+                    <mat-error *ngIf="signupForm.get('username')?.invalid">Username is required</mat-error>
+                </ng-template>
+
+
+            </mat-form-field>
+
+            <!-- First Name -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" required>
+                <mat-error *ngIf="signupForm.get('firstName')?.invalid">First name is required</mat-error>
+            </mat-form-field>
+
+            <!-- Last Name -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" required>
+                <mat-error *ngIf="signupForm.get('lastName')?.invalid">Last name is required</mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                    (input)="checkStrength()">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                    <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+                    Password is required
+                </mat-error>
+                <mat-error *ngIf="!signupForm.get('password')?.hasError('required')">
+                    <span *ngIf="signupForm.get('password')?.hasError('noUpperCase'); else checkSpecialChar">
+                        Password must contain at least one uppercase letter
+                    </span>
+                    <ng-template #checkSpecialChar>
+                        <span *ngIf="signupForm.get('password')?.hasError('noSpecialChar')">
+                            Password must contain at least one special character <br> (&#64;, &#35;, &#36;, etc.)
+                        </span>
+                    </ng-template>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="password-strength-container">
+                <mat-progress-bar mode="determinate" [value]="passwordStrengthValue"
+                    [color]="passwordStrengthColor"></mat-progress-bar>
+                <p class="password-strength-text">{{ passwordStrengthLabel }}</p>
+            </div>
+
+            <!-- Confirm Password -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword">
+                <mat-error *ngIf="signupForm.hasError('passwordMismatch')">Passwords do not match</mat-error>
+            </mat-form-field>
+
+            <!-- Sign Up Button -->
+            <button mat-raised-button color="primary" class="full-width" type="submit"
+                [disabled]="signupForm.invalid || isLoading">
+                <mat-progress-spinner *ngIf="isLoading" diameter="20" mode="indeterminate"></mat-progress-spinner>
+                <span *ngIf="!isLoading">Sign Up</span>
+            </button>
+        </form>
+    </mat-card>
+</div>
