@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { AccountService } from '../../services/account/account.service';
-import { LoginDto } from '../../dtos/login.dto';
+import { LoginDto } from '../../dtos/account.dto';
 
 @Component({
   selector: 'app-login-dialog',
