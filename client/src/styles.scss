@@ -1,40 +1,150 @@
 @use '@angular/material' as mat;
 
-$my-primary: mat.define-palette(mat.$light-blue-palette, 600);
-$my-accent: mat.define-palette(mat.$cyan-palette, A200);
-$my-warn: mat.define-palette(mat.$deep-orange-palette, A400);
+// Define primary color (Updated to your request)
+$my-primary: mat.define-palette((50: rgba(232, 240, 253, 1),
+      100: rgba(180, 215, 252, 1),
+      200: rgba(128, 190, 251, 1),
+      300: rgba(77, 165, 250, 1),
+      400: rgba(51, 149, 247, 1),
+      500: rgba(25, 133, 245, 1),
+      600: rgba(25, 124, 238, 1),
+      700: rgba(25, 114, 231, 1),
+      800: rgba(22, 103, 209, 1),
+      900: rgba(20, 92, 186, 1),
+      contrast: (50: black,
+        100: black,
+        200: black,
+        300: black,
+        400: black,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white)));
+
+$my-accent: mat.define-palette(mat.$blue-palette, A200);
+$my-warn: mat.define-palette(mat.$red-palette, A400);
+
+
 
 $my-light-theme: mat.define-light-theme((color: (primary: $my-primary,
         accent: $my-accent,
-        warn: $my-warn,
+        warn: $my-warn),
+      typography: mat.define-typography-config($font-family: 'Lato, Work Sans, Arial, sans-serif'
       ),
-      typography: mat.define-typography-config($font-family: 'lato, serif'), // ✅ Set Global Font
       density: 0));
 
 @include mat.core();
 @include mat.all-component-themes($my-light-theme);
 
+// Global Styles
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #f4f8fc;
-  color: mat.get-color-from-palette($my-primary, 900);
+  background-color: #f8f9fa;
+  color: #3c4043; // ✅ Updated to match screenshot
+  font-family: 'Lato', 'Work Sans', Arial, sans-serif;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  overflow: hidden;
 }
 
+// Heading Styles (Dark gray like Google UI)
+h1,
+h2 {
+  color: #1f1f1f;
+  font-weight: 600;
+}
+
+// Normal text color (body content)
+p {
+  color: #3c4043; // Slightly lighter gray
+}
+
+// Muted text (subtle descriptions, less emphasis)
+.muted-text {
+  color: #5f6368; // Light gray
+  font-size: 14px;
+}
+
+// Toolbar (Google-style clean header)
 mat-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
-  background-color: mat.get-color-from-palette($my-primary, 700);
-  color: white;
+  background-color: white;
+  color: #1f1f1f; // ✅ Toolbar text dark gray
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  height: 64px;
 }
 
+// Branding text (logo/title)
+.brand-title {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Work Sans', sans-serif;
+  color: #1f1f1f;
+  text-decoration: none;
+}
+
+// Material buttons (rounded for Google UI feel)
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  font-weight: 500;
+  text-transform: none;
+  border-radius: 8px;
+}
+
+// Google-style cards (rounded, subtle shadows)
+mat-card {
+  border-radius: 12px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background: white;
+  color: #1f1f1f;
+}
+
+// Section dividers (soft separators)
+.section-divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+// Links styled like Google UI
+a {
+  color: #1a73e8; // ✅ Google Blue for links
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+// Mobile responsiveness
 @media (max-width: 600px) {
   body {
     font-size: 14px;
+  }
+
+  mat-toolbar {
+    height: 56px;
+    padding: 0 12px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+  }
+
+  mat-card {
+    padding: 16px;
   }
 }
